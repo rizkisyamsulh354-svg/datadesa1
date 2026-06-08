@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - Desa Way Ilahan{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="jumbotron bg-primary text-white py-5">
+    <div class="container">
+        <h1 class="display-4"><i class="fas fa-landmark"></i> Selamat Datang</h1>
+        <p class="lead">di Portal Transparansi Data dan Keuangan Desa Way Ilahan</p>
+        <hr class="bg-white">
+        <p>Kecamatan Pulau Panggung, Kabupaten Tanggamus, Provinsi Lampung</p>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h3 class="card-title">{{ total_penduduk }}</h3>
+                    <p class="card-text">Total Penduduk</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-newspaper fa-3x text-success mb-3"></i>
+                    <h3 class="card-title">{{ berita_terbaru|length }}</h3>
+                    <p class="card-text">Berita Terbaru</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-images fa-3x text-info mb-3"></i>
+                    <h3 class="card-title"><i class="fas fa-arrow-right"></i></h3>
+                    <p class="card-text">Lihat Galeri</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profil Desa Section -->
+{% if profil %}
+<div class="bg-light py-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% if profil.logo %}
+                    <img src="{{ url_for('static', filename='uploads/' + profil.logo) }}" class="img-fluid rounded" alt="Logo Desa">
+                {% else %}
+                    <div class="bg-secondary text-white p-5 rounded text-center">
+                        <i class="fas fa-landmark fa-5x"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <h2>{{ profil.nama_desa }}</h2>
+                <hr>
+                <h5>Visi</h5>
+                <p>{{ profil.visi or 'Belum ada data visi' }}</p>
+                <h5>Misi</h5>
+                <p>{{ profil.misi or 'Belum ada data misi' }}</p>
+                <a href="{{ url_for('public.profil_desa') }}" class="btn btn-primary">Lihat Selengkapnya <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Berita Terbaru Section -->
+<div class="container my-5">
+    <h2 class="mb-4"><i class="fas fa-newspaper"></i> Berita Terbaru</h2>
+    <div class="row">
+        {% if berita_terbaru %}
+            {% for berita in berita_terbaru %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if berita.thumbnail %}
+                    <img src="{{ url_for('static', filename='uploads/' + berita.thumbnail) }}" class="card-img-top" alt="{{ berita.judul }}">
+                    {% else %}
+                    <div class="bg-secondary text-white p-5 text-center">
+                        <i class="fas fa-image fa-3x"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ berita.judul[:50] }}...</h5>
+                        <p class="card-text text-muted small">{{ berita.tanggal_publikasi.strftime('%d %B %Y') }}</p>
+                        <a href="{{ url_for('public.detail_berita', slug=berita.slug) }}" class="btn btn-sm btn-primary">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-info">Belum ada berita</div>
+        {% endif %}
+    </div>
+    <div class="text-center">
+        <a href="{{ url_for('public.berita') }}" class="btn btn-outline-primary">Lihat Semua Berita</a>
+    </div>
+</div>
+
+<!-- Quick Links Section -->
+<div class="bg-light py-5 my-5">
+    <div class="container">
+        <h2 class="mb-4 text-center">Akses Data Penting</h2>
+        <div class="row">
+            <div class="col-md-3 text-center mb-3">
+                <a href="{{ url_for('public.data_penduduk') }}" class="text-decoration-none">
+                    <div class="rounded-circle bg-primary text-white p-4 d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                        <i class="fas fa-people-group fa-2x"></i>
+                    </div>
+                    <p class="mt-2 text-dark"><strong>Data Penduduk</strong></p>
+                </a>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <a href="{{ url_for('public.apb_desa') }}" class="text-decoration-none">
+                    <div class="rounded-circle bg-success text-white p-4 d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                        <i class="fas fa-chart-pie fa-2x"></i>
+                    </div>
+                    <p class="mt-2 text-dark"><strong>APB Desa</strong></p>
+                </a>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <a href="{{ url_for('public.galeri') }}" class="text-decoration-none">
+                    <div class="rounded-circle bg-info text-white p-4 d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                        <i class="fas fa-image fa-2x"></i>
+                    </div>
+                    <p class="mt-2 text-dark"><strong>Galeri</strong></p>
+                </a>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <a href="{{ url_for('public.pengaduan') }}" class="text-decoration-none">
+                    <div class="rounded-circle bg-warning text-white p-4 d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                        <i class="fas fa-comments fa-2x"></i>
+                    </div>
+                    <p class="mt-2 text-dark"><strong>Pengaduan</strong></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Info Box -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-lock-open text-success"></i> Transparansi</h5>
+                    <p class="card-text">Semua data desa dapat diakses oleh masyarakat umum secara transparan dan terbuka untuk meningkatkan kepercayaan publik.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-shield-alt text-info"></i> Keamanan Data</h5>
+                    <p class="card-text">Data hanya dapat diubah oleh administrator yang memiliki akses khusus untuk menjaga integritas dan keakuratan informasi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

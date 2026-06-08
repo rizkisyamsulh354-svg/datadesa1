@@ -1,0 +1,82 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Kelola Aparatur Desa - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1>Kelola Aparatur Desa</h1>
+    <a href="{{ url_for('admin.tambah_aparatur') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Tambah Aparatur
+    </a>
+</div>
+
+{% if aparatur.items %}
+<div class="row">
+    {% for item in aparatur.items %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            {% if item.foto %}
+            <img src="{{ url_for('static', filename='uploads/' + item.foto) }}" class="card-img-top" alt="{{ item.nama }}" style="height: 250px; object-fit: cover;">
+            {% else %}
+            <div class="bg-secondary text-white p-5 text-center" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user fa-5x"></i>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-title">{{ item.nama }}</h6>
+                <p class="card-text text-primary"><strong>{{ item.jabatan }}</strong></p>
+                <small class="text-muted">
+                    {% if item.nomor_hp %}
+                    <i class="fas fa-phone"></i> {{ item.nomor_hp }}<br>
+                    {% endif %}
+                    {% if item.email %}
+                    <i class="fas fa-envelope"></i> {{ item.email }}
+                    {% endif %}
+                </small>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin.edit_aparatur', id=item.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <form method="POST" action="{{ url_for('admin.hapus_aparatur', id=item.id) }}" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus?')">
+                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if aparatur.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_aparatur', page=aparatur.prev_num) }}">Sebelumnya</a>
+        </li>
+        {% endif %}
+
+        {% for page_num in aparatur.iter_pages() %}
+            {% if page_num %}
+                {% if page_num == aparatur.page %}
+                <li class="page-item active">
+                    <span class="page-link">{{ page_num }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('admin.kelola_aparatur', page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if aparatur.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_aparatur', page=aparatur.next_num) }}">Berikutnya</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% else %}
+<div class="alert alert-info">Belum ada aparatur. <a href="{{ url_for('admin.tambah_aparatur') }}">Tambah aparatur baru</a></div>
+{% endif %}
+{% endblock %}

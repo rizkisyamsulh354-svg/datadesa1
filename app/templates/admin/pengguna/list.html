@@ -1,0 +1,88 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Kelola Pengguna - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1>Kelola Pengguna Admin</h1>
+    <a href="{{ url_for('admin.tambah_pengguna') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Tambah Pengguna
+    </a>
+</div>
+
+{% if pengguna.items %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Username</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Bergabung</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pengguna.items %}
+            <tr>
+                <td>{{ item.username }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.email }}</td>
+                <td>
+                    <span class="badge bg-{{ 'success' if item.is_active else 'secondary' }}">
+                        {{ 'Aktif' if item.is_active else 'Nonaktif' }}
+                    </span>
+                </td>
+                <td>{{ item.created_at.strftime('%d %B %Y') }}</td>
+                <td>
+                    <a href="{{ url_for('admin.edit_pengguna', id=item.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    {% if item.id != current_user.id %}
+                    <form method="POST" action="{{ url_for('admin.hapus_pengguna', id=item.id) }}" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus?')">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                    {% else %}
+                    <small class="text-muted">(Anda)</small>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if pengguna.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_pengguna', page=pengguna.prev_num) }}">Sebelumnya</a>
+        </li>
+        {% endif %}
+
+        {% for page_num in pengguna.iter_pages() %}
+            {% if page_num %}
+                {% if page_num == pengguna.page %}
+                <li class="page-item active">
+                    <span class="page-link">{{ page_num }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('admin.kelola_pengguna', page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if pengguna.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_pengguna', page=pengguna.next_num) }}">Berikutnya</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% else %}
+<div class="alert alert-info">Belum ada pengguna. <a href="{{ url_for('admin.tambah_pengguna') }}">Tambah pengguna baru</a></div>
+{% endif %}
+{% endblock %}

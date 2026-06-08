@@ -1,0 +1,95 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Kelola Pengaduan - Admin{% endblock %}
+
+{% block content %}
+<div class="my-4">
+    <h1>Kelola Pengaduan Masyarakat</h1>
+</div>
+
+<!-- Filter Status -->
+<div class="mb-3">
+    <form method="GET" class="form-inline">
+        <label class="me-2">Filter Status:</label>
+        <select name="status" class="form-select" onchange="this.form.submit()">
+            <option value="">-- Semua Status --</option>
+            <option value="Baru" {% if request.args.get('status') == 'Baru' %}selected{% endif %}>Baru</option>
+            <option value="Diproses" {% if request.args.get('status') == 'Diproses' %}selected{% endif %}>Diproses</option>
+            <option value="Ditanggapi" {% if request.args.get('status') == 'Ditanggapi' %}selected{% endif %}>Ditanggapi</option>
+            <option value="Selesai" {% if request.args.get('status') == 'Selesai' %}selected{% endif %}>Selesai</option>
+        </select>
+    </form>
+</div>
+
+{% if pengaduan.items %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Tanggal</th>
+                <th>Nama</th>
+                <th>Kategori</th>
+                <th>Subjek</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pengaduan.items %}
+            <tr>
+                <td>{{ item.tanggal_dibuat.strftime('%d %B %Y') }}</td>
+                <td>{{ item.nama_pelapor }}</td>
+                <td><span class="badge bg-primary">{{ item.kategori }}</span></td>
+                <td>{{ item.subjek[:40] }}</td>
+                <td>
+                    <span class="badge bg-{{ 'danger' if item.status == 'Baru' else 'warning' if item.status == 'Diproses' else 'info' if item.status == 'Ditanggapi' else 'success' }}">
+                        {{ item.status }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{{ url_for('admin.detail_pengaduan', id=item.id) }}" class="btn btn-sm btn-info">Lihat</a>
+                    <form method="POST" action="{{ url_for('admin.hapus_pengaduan', id=item.id) }}" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus?')">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if pengaduan.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_pengaduan', page=pengaduan.prev_num, status=request.args.get('status', '')) }}">Sebelumnya</a>
+        </li>
+        {% endif %}
+
+        {% for page_num in pengaduan.iter_pages() %}
+            {% if page_num %}
+                {% if page_num == pengaduan.page %}
+                <li class="page-item active">
+                    <span class="page-link">{{ page_num }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('admin.kelola_pengaduan', page=page_num, status=request.args.get('status', '')) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if pengaduan.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_pengaduan', page=pengaduan.next_num, status=request.args.get('status', '')) }}">Berikutnya</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% else %}
+<div class="alert alert-info">Belum ada pengaduan</div>
+{% endif %}
+{% endblock %}

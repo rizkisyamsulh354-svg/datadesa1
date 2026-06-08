@@ -1,0 +1,97 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Detail Pengaduan - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">Detail Pengaduan</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">{{ pengaduan.subjek }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>Nama Pelapor:</strong> {{ pengaduan.nama_pelapor }}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Email:</strong> {{ pengaduan.email_pelapor }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>Nomor HP:</strong> {{ pengaduan.nomor_hp or '-' }}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Kategori:</strong> <span class="badge bg-primary">{{ pengaduan.kategori }}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <strong>Tanggal Pengaduan:</strong> {{ pengaduan.tanggal_dibuat.strftime('%d %B %Y %H:%M') }}
+                </div>
+                <hr>
+                <h6>Isi Pengaduan:</h6>
+                <p>{{ pengaduan.isi }}</p>
+            </div>
+        </div>
+
+        {% if pengaduan.respon_admin %}
+        <div class="card mb-3 bg-light">
+            <div class="card-header">
+                <h5 class="mb-0">Respon Admin</h5>
+            </div>
+            <div class="card-body">
+                <p>{{ pengaduan.respon_admin }}</p>
+                <small class="text-muted">Direspon pada: {{ pengaduan.tanggal_direspon.strftime('%d %B %Y %H:%M') }}</small>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Update Status</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="Baru" {% if pengaduan.status == 'Baru' %}selected{% endif %}>Baru</option>
+                            <option value="Diproses" {% if pengaduan.status == 'Diproses' %}selected{% endif %}>Diproses</option>
+                            <option value="Ditanggapi" {% if pengaduan.status == 'Ditanggapi' %}selected{% endif %}>Ditanggapi</option>
+                            <option value="Selesai" {% if pengaduan.status == 'Selesai' %}selected{% endif %}>Selesai</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="respon" class="form-label">Respon</label>
+                        <textarea class="form-control" id="respon" name="respon" rows="6">{{ pengaduan.respon_admin or '' }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-save"></i> Simpan Respon
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="mb-0">Info</h5>
+            </div>
+            <div class="card-body">
+                <small>
+                    <strong>Status Saat Ini:</strong><br>
+                    <span class="badge bg-{{ 'danger' if pengaduan.status == 'Baru' else 'warning' if pengaduan.status == 'Diproses' else 'info' if pengaduan.status == 'Ditanggapi' else 'success' }}">
+                        {{ pengaduan.status }}
+                    </span>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

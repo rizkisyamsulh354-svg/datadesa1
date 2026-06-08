@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Kelola APB Desa - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1>Kelola APB Desa Tahun {{ tahun }}</h1>
+    <a href="{{ url_for('admin.tambah_apb') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Tambah Data
+    </a>
+</div>
+
+<!-- Filter Tahun -->
+<div class="mb-3">
+    <form method="GET" class="form-inline">
+        <label class="me-2">Tahun:</label>
+        <select name="tahun" class="form-select" onchange="this.form.submit()">
+            {% for t in tahun_list %}
+            <option value="{{ t }}" {% if tahun == t %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+{% if apb %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Kategori</th>
+                <th>Sub Kategori</th>
+                <th>Uraian</th>
+                <th class="text-end">Anggaran</th>
+                <th class="text-end">Realisasi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in apb %}
+            <tr>
+                <td>{{ item.kategori }}</td>
+                <td>{{ item.sub_kategori or '-' }}</td>
+                <td>{{ item.uraian or '-' }}</td>
+                <td class="text-end">Rp {{ "{:,.0f}".format(item.anggaran)|replace(',', '.') }}</td>
+                <td class="text-end">Rp {{ "{:,.0f}".format(item.realisasi)|replace(',', '.') }}</td>
+                <td>
+                    <a href="{{ url_for('admin.edit_apb', id=item.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form method="POST" action="{{ url_for('admin.hapus_apb', id=item.id) }}" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus?')">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% else %}
+<div class="alert alert-info">Belum ada data APB. <a href="{{ url_for('admin.tambah_apb') }}">Tambah data baru</a></div>
+{% endif %}
+{% endblock %}

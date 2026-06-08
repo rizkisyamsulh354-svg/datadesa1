@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Profil Desa - Desa Way Ilahan{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}">Beranda</a></li>
+            <li class="breadcrumb-item active">Profil Desa</li>
+        </ol>
+    </nav>
+
+    {% if profil %}
+    <div class="row">
+        <div class="col-md-4">
+            {% if profil.logo %}
+                <img src="{{ url_for('static', filename='uploads/' + profil.logo) }}" class="img-fluid rounded shadow" alt="Logo Desa">
+            {% else %}
+                <div class="bg-light p-5 rounded text-center shadow">
+                    <i class="fas fa-landmark fa-5x text-secondary"></i>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h1>{{ profil.nama_desa }}</h1>
+            <hr>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <strong>Lokasi Administratif:</strong>
+                    <p>{{ profil.kecamatan }}<br>{{ profil.kabupaten }}<br>{{ profil.provinsi }}</p>
+                </div>
+                <div class="col-md-6">
+                    <strong>Kontak:</strong>
+                    <p>
+                        <i class="fas fa-phone"></i> {{ profil.kontak_kantor or 'Tidak ada' }}<br>
+                        <i class="fas fa-envelope"></i> {{ profil.email_desa or 'Tidak ada' }}
+                    </p>
+                </div>
+            </div>
+
+            <h5>Alamat Kantor Desa</h5>
+            <p>{{ profil.alamat_kantor or 'Belum ada data' }}</p>
+
+            <h5>Luas Desa</h5>
+            <p>{{ profil.luas_desa or 'Belum ada data' }} Km²</p>
+
+            <h5>Jumlah Penduduk</h5>
+            <p>{{ profil.jumlah_penduduk or 'Belum ada data' }} jiwa ({{ profil.juml_keluarga or 'Belum ada data' }} keluarga)</p>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h3><i class="fas fa-eye"></i> Visi</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>{{ profil.visi or 'Belum ada data visi' }}</p>
+        </div>
+    </div>
+
+    <h3><i class="fas fa-check-circle"></i> Misi</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>{{ profil.misi or 'Belum ada data misi' }}</p>
+        </div>
+    </div>
+
+    <h3><i class="fas fa-book"></i> Sejarah Desa</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>{{ profil.sejarah_desa or 'Belum ada data sejarah' }}</p>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info">Data profil desa belum tersedia. Silakan hubungi administrator.</div>
+    {% endif %}
+
+    <!-- Aparatur Desa Section -->
+    <hr class="my-5">
+    <h2><i class="fas fa-users"></i> Aparatur Desa</h2>
+    
+    {% if aparatur %}
+    <div class="row">
+        {% for aparat in aparatur %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                {% if aparat.foto %}
+                <img src="{{ url_for('static', filename='uploads/' + aparat.foto) }}" class="card-img-top" alt="{{ aparat.nama }}" style="height: 300px; object-fit: cover;">
+                {% else %}
+                <div class="bg-secondary text-white p-5 text-center" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user fa-5x"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ aparat.nama }}</h5>
+                    <p class="card-text text-primary"><strong>{{ aparat.jabatan }}</strong></p>
+                    <hr>
+                    <p class="small">
+                        {% if aparat.nomor_hp %}
+                        <i class="fas fa-phone"></i> {{ aparat.nomor_hp }}<br>
+                        {% endif %}
+                        {% if aparat.email %}
+                        <i class="fas fa-envelope"></i> {{ aparat.email }}<br>
+                        {% endif %}
+                        {% if aparat.tanggal_mulai_jabatan %}
+                        <i class="fas fa-calendar"></i> Sejak {{ aparat.tanggal_mulai_jabatan.strftime('%d %B %Y') }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">Belum ada data aparatur desa</div>
+    {% endif %}
+</div>
+{% endblock %}

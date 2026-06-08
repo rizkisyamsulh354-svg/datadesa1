@@ -1,0 +1,165 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard Admin - Desa Way Ilahan{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">Dashboard Admin</h1>
+
+<!-- Stats Row -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Berita</h6>
+                        <h2>{{ total_berita }}</h2>
+                    </div>
+                    <i class="fas fa-newspaper fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Pengaduan Baru</h6>
+                        <h2>{{ pengaduan_baru }}</h2>
+                    </div>
+                    <i class="fas fa-bell fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Data Penduduk</h6>
+                        <h2>{{ total_penduduk }}</h2>
+                    </div>
+                    <i class="fas fa-users fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Pengaduan</h6>
+                        <h2>{{ total_pengaduan }}</h2>
+                    </div>
+                    <i class="fas fa-comments fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Berita Terbaru -->
+    <div class="col-md-6">
+        <h3 class="mb-3">Berita Terbaru</h3>
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    {% if berita_terbaru %}
+                        {% for berita in berita_terbaru %}
+                        <div class="list-group-item d-flex justify-content-between align-items-start p-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">{{ berita.judul[:50] }}</h6>
+                                <small class="text-muted">{{ berita.tanggal_publikasi.strftime('%d %B %Y') }}</small>
+                            </div>
+                            <a href="{{ url_for('admin.edit_berita', id=berita.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="p-3 text-center text-muted">Tidak ada berita</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin.kelola_berita') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pengaduan Terbaru -->
+    <div class="col-md-6">
+        <h3 class="mb-3">Pengaduan Terbaru</h3>
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    {% if pengaduan_terbaru %}
+                        {% for pengaduan in pengaduan_terbaru %}
+                        <div class="list-group-item d-flex justify-content-between align-items-start p-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">{{ pengaduan.subjek[:40] }}</h6>
+                                <small class="text-muted">{{ pengaduan.nama_pelapor }} - {{ pengaduan.tanggal_dibuat.strftime('%d %B %Y') }}</small>
+                                <br>
+                                <small><span class="badge bg-{{ 'danger' if pengaduan.status == 'Baru' else 'warning' if pengaduan.status == 'Diproses' else 'success' }}">{{ pengaduan.status }}</span></small>
+                            </div>
+                            <a href="{{ url_for('admin.detail_pengaduan', id=pengaduan.id) }}" class="btn btn-sm btn-outline-primary">Lihat</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="p-3 text-center text-muted">Tidak ada pengaduan</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin.kelola_pengaduan') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Menu Cepat</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-2 mb-3">
+                        <a href="{{ url_for('admin.tambah_berita') }}" class="btn btn-sm btn-primary w-100 mb-2">
+                            <i class="fas fa-plus"></i> Berita Baru
+                        </a>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <a href="{{ url_for('admin.tambah_galeri') }}" class="btn btn-sm btn-success w-100 mb-2">
+                            <i class="fas fa-plus"></i> Upload Galeri
+                        </a>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <a href="{{ url_for('admin.tambah_dokumen') }}" class="btn btn-sm btn-info w-100 mb-2">
+                            <i class="fas fa-plus"></i> Upload Dokumen
+                        </a>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <a href="{{ url_for('admin.tambah_penduduk') }}" class="btn btn-sm btn-warning w-100 mb-2">
+                            <i class="fas fa-plus"></i> Data Penduduk
+                        </a>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <a href="{{ url_for('admin.kelola_pengaduan') }}" class="btn btn-sm btn-danger w-100 mb-2">
+                            <i class="fas fa-comments"></i> Pengaduan
+                        </a>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <a href="{{ url_for('admin.edit_profil_desa') }}" class="btn btn-sm btn-secondary w-100 mb-2">
+                            <i class="fas fa-edit"></i> Profil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

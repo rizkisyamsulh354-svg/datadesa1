@@ -1,0 +1,74 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Kelola Galeri - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1>Kelola Galeri</h1>
+    <a href="{{ url_for('admin.tambah_galeri') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Upload File
+    </a>
+</div>
+
+{% if galeri.items %}
+<div class="row">
+    {% for item in galeri.items %}
+    <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card">
+            {% if item.file_type == 'photo' %}
+            <img src="{{ url_for('static', filename='uploads/gallery/' + item.file_path) }}" class="card-img-top" alt="{{ item.judul }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+            <div class="bg-secondary text-white p-4 text-center" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-video fa-4x"></i>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-title">{{ item.judul[:30] }}</h6>
+                <small class="text-muted">{{ item.tanggal_upload.strftime('%d %B %Y') }}</small>
+                <p class="small">{{ item.kategori }}</p>
+                <div>
+                    <form method="POST" action="{{ url_for('admin.hapus_galeri', id=item.id) }}" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus?')">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if galeri.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_galeri', page=galeri.prev_num) }}">Sebelumnya</a>
+        </li>
+        {% endif %}
+
+        {% for page_num in galeri.iter_pages() %}
+            {% if page_num %}
+                {% if page_num == galeri.page %}
+                <li class="page-item active">
+                    <span class="page-link">{{ page_num }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('admin.kelola_galeri', page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if galeri.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin.kelola_galeri', page=galeri.next_num) }}">Berikutnya</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% else %}
+<div class="alert alert-info">Belum ada file galeri. <a href="{{ url_for('admin.tambah_galeri') }}">Upload file baru</a></div>
+{% endif %}
+{% endblock %}

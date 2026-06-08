@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Dokumen Publik - Desa Way Ilahan{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}">Beranda</a></li>
+            <li class="breadcrumb-item active">Dokumen Publik</li>
+        </ol>
+    </nav>
+
+    <h1 class="mb-4"><i class="fas fa-file-pdf"></i> Dokumen Publik</h1>
+
+    <!-- Filter Jenis Dokumen -->
+    <div class="mb-4">
+        <a href="{{ url_for('public.dokumen_publik') }}" class="btn btn-{{ 'primary' if not request.args.get('jenis') else 'outline-primary' }}">
+            Semua
+        </a>
+        {% for jen in jenis_list %}
+        <a href="{{ url_for('public.dokumen_publik', jenis=jen) }}" class="btn btn-{{ 'primary' if request.args.get('jenis') == jen else 'outline-primary' }}">
+            {{ jen }}
+        </a>
+        {% endfor %}
+    </div>
+
+    {% if dokumen.items %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Judul</th>
+                    <th>Jenis</th>
+                    <th>Tanggal Upload</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in dokumen.items %}
+                <tr>
+                    <td>
+                        <strong>{{ doc.judul }}</strong><br>
+                        <small class="text-muted">{{ doc.deskripsi[:50] if doc.deskripsi else '' }}</small>
+                    </td>
+                    <td><span class="badge bg-info">{{ doc.jenis_dokumen }}</span></td>
+                    <td>{{ doc.tanggal_upload.strftime('%d %B %Y') }}</td>
+                    <td>
+                        <a href="{{ url_for('public.download_dokumen', filename=doc.file_path) }}" class="btn btn-sm btn-primary" download>
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if dokumen.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('public.dokumen_publik', page=dokumen.prev_num, jenis=request.args.get('jenis', '')) }}">Sebelumnya</a>
+            </li>
+            {% endif %}
+
+            {% for page_num in dokumen.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == dokumen.page %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('public.dokumen_publik', page=page_num, jenis=request.args.get('jenis', '')) }}">{{ page_num }}</a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if dokumen.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('public.dokumen_publik', page=dokumen.next_num, jenis=request.args.get('jenis', '')) }}">Berikutnya</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% else %}
+    <div class="alert alert-info">Belum ada dokumen</div>
+    {% endif %}
+</div>
+{% endblock %}

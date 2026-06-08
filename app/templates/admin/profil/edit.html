@@ -1,0 +1,135 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Edit Profil Desa - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">Edit Profil Desa</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Informasi Dasar</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nama_desa" class="form-label">Nama Desa <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nama_desa" name="nama_desa" value="{{ profil.nama_desa if profil else '' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="provinsi" class="form-label">Provinsi <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="provinsi" name="provinsi" value="{{ profil.provinsi if profil else '' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="kabupaten" class="form-label">Kabupaten <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="kabupaten" name="kabupaten" value="{{ profil.kabupaten if profil else '' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="kecamatan" class="form-label">Kecamatan <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ profil.kecamatan if profil else '' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="luas_desa" class="form-label">Luas Desa (Km²)</label>
+                            <input type="number" class="form-control" id="luas_desa" name="luas_desa" value="{{ profil.luas_desa if profil else '' }}" step="0.01">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="jumlah_penduduk" class="form-label">Jumlah Penduduk</label>
+                            <input type="number" class="form-control" id="jumlah_penduduk" name="jumlah_penduduk" value="{{ profil.jumlah_penduduk if profil else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="juml_keluarga" class="form-label">Jumlah Keluarga</label>
+                            <input type="number" class="form-control" id="juml_keluarga" name="juml_keluarga" value="{{ profil.juml_keluarga if profil else '' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Kontak dan Alamat</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="kontak_kantor" class="form-label">Nomor Telepon</label>
+                            <input type="tel" class="form-control" id="kontak_kantor" name="kontak_kantor" value="{{ profil.kontak_kantor if profil else '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email_desa" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email_desa" name="email_desa" value="{{ profil.email_desa if profil else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="alamat_kantor" class="form-label">Alamat Kantor</label>
+                        <textarea class="form-control" id="alamat_kantor" name="alamat_kantor" rows="3">{{ profil.alamat_kantor if profil else '' }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Visi, Misi & Sejarah</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="visi" class="form-label">Visi</label>
+                        <textarea class="form-control" id="visi" name="visi" rows="3">{{ profil.visi if profil else '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="misi" class="form-label">Misi</label>
+                        <textarea class="form-control" id="misi" name="misi" rows="3">{{ profil.misi if profil else '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="sejarah_desa" class="form-label">Sejarah Desa</label>
+                        <textarea class="form-control" id="sejarah_desa" name="sejarah_desa" rows="5">{{ profil.sejarah_desa if profil else '' }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-save"></i> Simpan Profil
+                </button>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Logo Desa</h5>
+                </div>
+                <div class="card-body">
+                    {% if profil and profil.logo %}
+                    <img src="{{ url_for('static', filename='uploads/' + profil.logo) }}" class="img-fluid rounded mb-3" alt="Logo Desa">
+                    <p class="small text-muted">Logo saat ini: {{ profil.logo }}</p>
+                    {% else %}
+                    <div class="bg-light p-4 rounded text-center mb-3">
+                        <i class="fas fa-image fa-5x text-muted"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <label for="logo" class="form-label">Ganti Logo</label>
+                        <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
+                        <small class="text-muted">Format: JPG, PNG. Ukuran maks: 50MB</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

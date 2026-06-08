@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Berita - Desa Way Ilahan{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}">Beranda</a></li>
+            <li class="breadcrumb-item active">Berita</li>
+        </ol>
+    </nav>
+
+    <h1 class="mb-4"><i class="fas fa-newspaper"></i> Berita Desa</h1>
+
+    {% if berita.items %}
+    <div class="row">
+        {% for item in berita.items %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if item.thumbnail %}
+                <img src="{{ url_for('static', filename='uploads/' + item.thumbnail) }}" class="card-img-top" alt="{{ item.judul }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                <div class="bg-secondary text-white p-4 text-center" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-image fa-4x"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.judul }}</h5>
+                    <p class="card-text text-muted small">
+                        <i class="fas fa-calendar"></i> {{ item.tanggal_publikasi.strftime('%d %B %Y') }}<br>
+                        <i class="fas fa-user"></i> {{ item.penulis }}<br>
+                        <i class="fas fa-eye"></i> {{ item.views }} views
+                    </p>
+                    <p class="card-text">{{ item.konten[:100] }}...</p>
+                    <a href="{{ url_for('public.detail_berita', slug=item.slug) }}" class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if berita.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('public.berita', page=berita.prev_num) }}">Sebelumnya</a>
+            </li>
+            {% endif %}
+
+            {% for page_num in berita.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == berita.page %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('public.berita', page=page_num) }}">{{ page_num }}</a>
+                    </li>
+                    {% endif %}
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if berita.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('public.berita', page=berita.next_num) }}">Berikutnya</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% else %}
+    <div class="alert alert-info">Belum ada berita</div>
+    {% endif %}
+</div>
+{% endblock %}

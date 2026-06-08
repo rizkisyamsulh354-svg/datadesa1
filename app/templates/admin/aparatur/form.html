@@ -1,0 +1,87 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ action }} Aparatur - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">{{ action }} Aparatur Desa</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ aparatur.nama if aparatur else '' }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="jabatan" class="form-label">Jabatan <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ aparatur.jabatan if aparatur else '' }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nomor_identitas" class="form-label">Nomor Identitas (NIK/NPPE)</label>
+                        <input type="text" class="form-control" id="nomor_identitas" name="nomor_identitas" value="{{ aparatur.nomor_identitas if aparatur else '' }}">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nomor_hp" class="form-label">Nomor HP</label>
+                            <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp" value="{{ aparatur.nomor_hp if aparatur else '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ aparatur.email if aparatur else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label">Alamat</label>
+                        <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ aparatur.alamat if aparatur else '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tanggal_mulai_jabatan" class="form-label">Tanggal Mulai Jabatan</label>
+                        <input type="date" class="form-control" id="tanggal_mulai_jabatan" name="tanggal_mulai_jabatan" value="{{ aparatur.tanggal_mulai_jabatan if aparatur else '' }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan" rows="3">{{ aparatur.keterangan if aparatur else '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Simpan
+                        </button>
+                        <a href="{{ url_for('admin.kelola_aparatur') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Foto</h5>
+            </div>
+            <div class="card-body">
+                {% if aparatur and aparatur.foto %}
+                <img src="{{ url_for('static', filename='uploads/' + aparatur.foto) }}" class="img-fluid rounded mb-3" alt="{{ aparatur.nama }}">
+                <p class="small text-muted">Foto saat ini: {{ aparatur.foto }}</p>
+                {% else %}
+                <div class="bg-light p-4 rounded text-center mb-3">
+                    <i class="fas fa-user fa-5x text-muted"></i>
+                </div>
+                {% endif %}
+                
+                <label for="foto" class="form-label">Ganti Foto</label>
+                <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+                <small class="text-muted">Format: JPG, PNG. Ukuran maks: 50MB</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

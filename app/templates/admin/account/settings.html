@@ -1,0 +1,104 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Pengaturan Akun - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">Pengaturan Akun</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Update Profil -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">Update Profil</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin.update_profil_akun') }}">
+                    <div class="mb-3">
+                        <label for="full_name" class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{ current_user.full_name }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{ current_user.username }}" disabled>
+                        <small class="text-muted">Username tidak dapat diubah</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Simpan Profil
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Ubah Password -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Ubah Password</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin.ubah_password') }}">
+                    <div class="mb-3">
+                        <label for="old_password" class="form-label">Password Lama <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="old_password" name="old_password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="new_password" class="form-label">Password Baru <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="new_password" name="new_password" required>
+                        <small class="text-muted">Minimal 6 karakter</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Konfirmasi Password Baru <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-key"></i> Ubah Password
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle"></i> Informasi Akun</h5>
+                <hr>
+                <p class="small">
+                    <strong>Username:</strong> {{ current_user.username }}<br>
+                    <strong>Email:</strong> {{ current_user.email }}<br>
+                    <strong>Nama:</strong> {{ current_user.full_name }}<br>
+                    <strong>Status:</strong> <span class="badge bg-success">Aktif</span><br>
+                    <strong>Bergabung:</strong> {{ current_user.created_at.strftime('%d %B %Y') }}<br>
+                    {% if current_user.last_login %}
+                    <strong>Login Terakhir:</strong> {{ current_user.last_login.strftime('%d %B %Y %H:%M') }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="mb-0">Tips Keamanan</h5>
+            </div>
+            <div class="card-body">
+                <ul class="small">
+                    <li>Gunakan password yang kuat (kombinasi huruf, angka, dan simbol)</li>
+                    <li>Ubah password secara berkala</li>
+                    <li>Jangan bagikan password dengan siapa pun</li>
+                    <li>Logout jika menggunakan komputer umum</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

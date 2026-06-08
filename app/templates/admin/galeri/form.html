@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Upload Galeri - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">Upload File Galeri</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="judul" name="judul" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <input type="text" class="form-control" id="kategori" name="kategori" value="Kegiatan Desa">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Pilih File (Foto/Video) <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="file" name="file" accept="image/*,video/*" required>
+                        <small class="text-muted">Format: JPG, PNG, GIF (Foto) atau MP4, AVI, MOV (Video). Maksimal 50MB</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Upload
+                        </button>
+                        <a href="{{ url_for('admin.kelola_galeri') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle"></i> Panduan Upload</h5>
+                <p class="small">
+                    Upload foto atau video kegiatan desa untuk ditampilkan di galeri publik.
+                </p>
+                <hr>
+                <h6>Format File yang Didukung:</h6>
+                <ul class="small">
+                    <li>Foto: JPG, PNG, GIF</li>
+                    <li>Video: MP4, AVI, MOV</li>
+                    <li>Ukuran maksimal: 50MB</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

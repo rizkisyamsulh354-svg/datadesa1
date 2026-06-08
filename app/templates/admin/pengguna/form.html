@@ -1,0 +1,62 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ action }} Pengguna - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">{{ action }} Pengguna Admin</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form method="POST">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ pengguna.username if pengguna else '' }}" {% if pengguna %}disabled{% else %}required{% endif %}>
+                            {% if pengguna %}
+                            <small class="text-muted">Username tidak dapat diubah</small>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="full_name" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="full_name" name="full_name" value="{{ pengguna.full_name if pengguna else '' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ pengguna.email if pengguna else '' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Password {% if not pengguna %}<span class="text-danger">*</span>{% endif %}</label>
+                            <input type="password" class="form-control" id="password" name="password" {% if not pengguna %}required{% endif %}>
+                            {% if pengguna %}
+                            <small class="text-muted">Kosongkan untuk tidak mengubah password</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if pengguna %}
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="is_active" name="is_active" 
+                               {% if pengguna.is_active %}checked{% endif %} value="on">
+                        <label class="form-check-label" for="is_active">
+                            Aktifkan pengguna
+                        </label>
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Simpan
+                        </button>
+                        <a href="{{ url_for('admin.kelola_pengguna') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

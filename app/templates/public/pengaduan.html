@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Pengaduan Masyarakat - Desa Way Ilahan{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}">Beranda</a></li>
+            <li class="breadcrumb-item active">Pengaduan Masyarakat</li>
+        </ol>
+    </nav>
+
+    <h1 class="mb-4"><i class="fas fa-comments"></i> Kotak Pengaduan dan Saran Masyarakat</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Formulir Pengaduan/Saran</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nama" name="nama" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nomor_hp" class="form-label">Nomor Handphone</label>
+                            <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="kategori" class="form-label">Kategori <span class="text-danger">*</span></label>
+                            <select class="form-select" id="kategori" name="kategori" required>
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="Pengaduan">Pengaduan</option>
+                                <option value="Saran">Saran</option>
+                                <option value="Pertanyaan">Pertanyaan</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="subjek" class="form-label">Subjek <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="subjek" name="subjek" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="isi" class="form-label">Isi Pengaduan/Saran <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="isi" name="isi" rows="6" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Kirim Pengaduan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-info-circle"></i> Informasi</h5>
+                    <p class="small">
+                        Kotak pengaduan ini terbuka untuk menerima segala bentuk pengaduan, saran, dan pertanyaan dari masyarakat Desa Way Ilahan. 
+                    </p>
+                    <p class="small">
+                        Pengaduan Anda akan ditanggapi oleh administrator dalam waktu secepatnya.
+                    </p>
+                    <hr>
+                    <h6>Kategori Pengaduan:</h6>
+                    <ul class="small">
+                        <li><strong>Pengaduan:</strong> Keluhan atau laporan masalah</li>
+                        <li><strong>Saran:</strong> Masukan dan ide konstruktif</li>
+                        <li><strong>Pertanyaan:</strong> Pertanyaan seputar desa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

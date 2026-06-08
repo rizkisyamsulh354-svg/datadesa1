@@ -1,0 +1,79 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ action }} Berita - Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">{{ action }} Berita</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ berita.judul if berita else '' }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="konten" class="form-label">Konten <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="konten" name="konten" rows="10" required>{{ berita.konten if berita else '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="thumbnail" class="form-label">Thumbnail</label>
+                        <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                        {% if berita and berita.thumbnail %}
+                        <small class="text-muted">Thumbnail saat ini: {{ berita.thumbnail }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="is_published" name="is_published" 
+                               {% if berita and berita.is_published %}checked{% endif %} value="on">
+                        <label class="form-check-label" for="is_published">
+                            Publikasikan berita
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Simpan
+                        </button>
+                        <a href="{{ url_for('admin.kelola_berita') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle"></i> Informasi</h5>
+                <p class="small">
+                    Isi konten berita dengan deskripsi yang jelas dan menarik. 
+                    Gunakan thumbnail yang berkualitas untuk menarik perhatian pembaca.
+                </p>
+                <hr>
+                <h6>Tips Penulisan:</h6>
+                <ul class="small">
+                    <li>Gunakan judul yang menarik dan deskriptif</li>
+                    <li>Sertakan tanggal dan sumber informasi</li>
+                    <li>Gunakan bahasa yang mudah dipahami</li>
+                    <li>Upload foto/gambar yang relevan</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
+<script>
+tinymce.init({
+    selector: '#konten',
+    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textpattern',
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+});
+</script>
+{% endblock %}
