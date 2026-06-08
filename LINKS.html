@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Desa Way Ilahan - Quick Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px;
+            border: none;
+        }
+        
+        .btn-link-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            padding: 20px;
+        }
+        
+        .btn-link {
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .btn-link:hover {
+            background: #f8f9fa;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .btn-link-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .btn-link span:last-child {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .title-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .title-section h1 {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .qr-section p {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .ip-display {
+            background: rgba(0,0,0,0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .badge-responsive {
+            display: inline-block;
+            background: #198754;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .title-section h1 {
+                font-size: 28px;
+            }
+            
+            .container {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1>🏛️ Desa Way Ilahan</h1>
+            <p>Sistem Informasi & Transparansi Data</p>
+        </div>
+        
+        <!-- IP Display -->
+        <div class="ip-display">
+            IP Server: <strong>10.0.3.164:5000</strong>
+        </div>
+        
+        <!-- Public Section -->
+        <div class="card">
+            <div class="card-header">
+                👥 AKSES PUBLIK <span class="badge-responsive">Responsive</span>
+            </div>
+            <div class="btn-link-group">
+                <a href="http://10.0.3.164:5000/" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">🏠</span>
+                        Halaman Beranda
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/profil-desa" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📋</span>
+                        Profil Desa
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/berita" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📰</span>
+                        Berita Desa
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/galeri" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">🖼️</span>
+                        Galeri Kegiatan
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/dokumen-publik" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📁</span>
+                        Dokumen Publik
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/data-penduduk" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">👥</span>
+                        Data Penduduk
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/apb-desa" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">💰</span>
+                        APB Desa
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/pengaduan" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">💬</span>
+                        Kotak Pengaduan
+                    </span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Admin Section -->
+        <div class="card">
+            <div class="card-header">
+                🔐 AKSES ADMIN <span class="badge-responsive">Login Required</span>
+            </div>
+            <div class="btn-link-group">
+                <a href="http://10.0.3.164:5000/auth/login" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">🔑</span>
+                        Login Admin
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/dashboard" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📊</span>
+                        Dashboard
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/berita" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📝</span>
+                        Kelola Berita
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/galeri" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">🎨</span>
+                        Kelola Galeri
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/dokumen" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📄</span>
+                        Kelola Dokumen
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/pengaduan" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📢</span>
+                        Respon Pengaduan
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/penduduk" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">👨‍👩‍👧‍👦</span>
+                        Kelola Penduduk
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/apb" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">📈</span>
+                        Kelola APB
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/aparatur" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">👔</span>
+                        Kelola Aparatur
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/profil" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">⚙️</span>
+                        Edit Profil Desa
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/pengaturan-akun" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">🔧</span>
+                        Pengaturan Akun
+                    </span>
+                    <span>→</span>
+                </a>
+                <a href="http://10.0.3.164:5000/admin/pengguna" class="btn-link" target="_blank">
+                    <span>
+                        <span class="btn-link-icon">👤</span>
+                        Kelola Pengguna
+                    </span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- QR Code Section -->
+        <div class="qr-section">
+            <p>📱 Scan untuk akses mobile:</p>
+            <div class="qr-code" id="qrcode"></div>
+            <p style="margin-top: 15px; font-size: 12px; color: #666;">
+                atau buka: <strong>http://10.0.3.164:5000</strong>
+            </p>
+        </div>
+        
+        <!-- Credentials -->
+        <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px; margin-bottom: 20px;">
+            <p style="margin: 0; color: var(--primary-color); font-weight: bold; margin-bottom: 10px;">
+                🔐 Akun Admin Default:
+            </p>
+            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 13px;">
+                <div>Username: <strong>admin</strong></div>
+                <div>Password: <strong>admin123</strong></div>
+            </div>
+            <p style="margin-top: 10px; font-size: 12px; color: #d32f2f;">
+                ⚠️ Ubah password setelah login pertama!
+            </p>
+        </div>
+    </div>
+    
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Generate QR Code
+        new QRCode(document.getElementById("qrcode"), {
+            text: "http://10.0.3.164:5000",
+            width: 200,
+            height: 200,
+            colorDark: "#0d6efd",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link berhasil disalin!');
+            });
+        }
+    </script>
+</body>
+</html>
