@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: datadesa-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python run.py
+    startCommand: gunicorn -w 4 -b 0.0.0.0 run:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        scope: secret
+      - key: PYTHONUNBUFFERED
+        value: "1"
+
+databases:
+  - name: datadesa-db
+    databaseName: datadesa_db
+    user: datadesa_user
+    ipAllowList: []

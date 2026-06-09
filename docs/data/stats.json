@@ -1,0 +1,32 @@
+{
+  "total_penduduk": 1286,
+  "total_berita": 8,
+  "total_galeri": 12,
+  "total_pengaduan": 4,
+  "berita_terbaru": [
+    {
+      "id": 1,
+      "judul": "Penyuluhan Kesehatan Masyarakat Desa Way Ilahan",
+      "slug": "penyuluhan-kesehatan-masyarakat",
+      "thumbnail": null,
+      "tanggal_publikasi": "2024-06-01T09:00:00",
+      "views": 125
+    },
+    {
+      "id": 2,
+      "judul": "Peresmian Taman Bacaan Desa",
+      "slug": "peresmian-taman-bacaan-desa",
+      "thumbnail": null,
+      "tanggal_publikasi": "2024-05-20T10:30:00",
+      "views": 98
+    },
+    {
+      "id": 3,
+      "judul": "Program Pembersihan Sungai Lingkungan Desa",
+      "slug": "program-pembersihan-sungai",
+      "thumbnail": null,
+      "tanggal_publikasi": "2024-05-12T08:45:00",
+      "views": 77
+    }
+  ]
+}

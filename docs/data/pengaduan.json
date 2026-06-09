@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nama_pelapor": "Tini Wulandari",
+      "subjek": "Lampu jalan rusak di Dusun A",
+      "kategori": "Pengaduan",
+      "status": "Selesai",
+      "tanggal_dibuat": "2024-05-18T14:00:00",
+      "respon_admin": "Sudah diperbaiki oleh tim kebersihan desa."
+    },
+    {
+      "id": 2,
+      "nama_pelapor": "Budi Santoso",
+      "subjek": "Permintaan pembangunan pos ronda baru",
+      "kategori": "Saran",
+      "status": "Diproses",
+      "tanggal_dibuat": "2024-05-22T09:30:00",
+      "respon_admin": "Dalam perencanaan pagu anggaran desa."
+    },
+    {
+      "id": 3,
+      "nama_pelapor": "Rina Marlina",
+      "subjek": "Permohonan kursus komputer gratis",
+      "kategori": "Pertanyaan",
+      "status": "Baru",
+      "tanggal_dibuat": "2024-06-01T11:15:00",
+      "respon_admin": null
+    },
+    {
+      "id": 4,
+      "nama_pelapor": "Hendra Saputra",
+      "subjek": "Permintaan perbaikan drainase dusun B",
+      "kategori": "Pengaduan",
+      "status": "Diproses",
+      "tanggal_dibuat": "2024-06-05T10:20:00",
+      "respon_admin": "Tim teknis sedang menjadwalkan perbaikan.",
+      "isi": "Drainase di RT 03 RT 02 sering banjir ketika hujan deras."
+    }
+  ]
+}

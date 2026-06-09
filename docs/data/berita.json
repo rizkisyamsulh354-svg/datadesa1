@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "judul": "Penyuluhan Kesehatan Masyarakat Desa Way Ilahan",
+      "slug": "penyuluhan-kesehatan-masyarakat",
+      "konten": "Kegiatan penyuluhan kesehatan dilaksanakan di balai desa dengan partisipasi warga.",
+      "thumbnail": null,
+      "penulis": "Pejabat Desa",
+      "tanggal_publikasi": "2024-06-01T09:00:00",
+      "views": 125
+    },
+    {
+      "id": 2,
+      "judul": "Peresmian Taman Bacaan Desa",
+      "slug": "peresmian-taman-bacaan-desa",
+      "konten": "Taman bacaan baru dibuka untuk mendukung kegiatan literasi anak-anak desa.",
+      "thumbnail": null,
+      "penulis": "Admin Desa",
+      "tanggal_publikasi": "2024-05-20T10:30:00",
+      "views": 98
+    },
+    {
+      "id": 3,
+      "judul": "Program Pembersihan Sungai Lingkungan Desa",
+      "slug": "program-pembersihan-sungai",
+      "konten": "Warga bersama melakukan gotong royong membersihkan sungai desa pada akhir pekan.",
+      "thumbnail": null,
+      "penulis": "Admin Desa",
+      "tanggal_publikasi": "2024-05-12T08:45:00",
+      "views": 77
+    },
+    {
+      "id": 4,
+      "judul": "Pelatihan UMKM untuk Ibu-Ibu PKK",
+      "slug": "pelatihan-umkm-ibu-pkk",
+      "konten": "Pelatihan usaha kecil bagi pelaku UMKM desa untuk meningkatkan pendapatan keluarga.",
+      "thumbnail": null,
+      "penulis": "Kepala Desa",
+      "tanggal_publikasi": "2024-04-28T14:20:00",
+      "views": 65
+    },
+    {
+      "id": 5,
+      "judul": "Pelatihan Ketahanan Pangan Desa",
+      "slug": "pelatihan-ketahanan-pangan-desa",
+      "konten": "Kegiatan ini membantu keluarga meningkatkan produksi pangan lokal secara mandiri.",
+      "thumbnail": null,
+      "penulis": "Dinas Pertanian",
+      "tanggal_publikasi": "2024-04-10T09:30:00",
+      "views": 54
+    },
+    {
+      "id": 6,
+      "judul": "Pembangunan Jalan Setapak Baru",
+      "slug": "pembangunan-jalan-setapak-baru",
+      "konten": "Jalan setapak baru dibangun untuk menghubungkan dusun-dusun dan memudahkan akses warga.",
+      "thumbnail": null,
+      "penulis": "Sekretariat Desa",
+      "tanggal_publikasi": "2024-03-25T16:00:00",
+      "views": 82
+    },
+    {
+      "id": 7,
+      "judul": "Festival Kuliner Lokal Desa",
+      "slug": "festival-kuliner-lokal-desa",
+      "konten": "Festival ini menampilkan produk makanan dan minuman khas desa serta mendukung pelaku UMKM lokal.",
+      "thumbnail": null,
+      "penulis": "Panitia Acara",
+      "tanggal_publikasi": "2024-03-05T11:00:00",
+      "views": 71
+    },
+    {
+      "id": 8,
+      "judul": "Peningkatan Akses Air Bersih",
+      "slug": "peningkatan-akses-air-bersih",
+      "konten": "Desa menerima bantuan untuk memperbaiki sumur dan jaringan air bersih bagi warga.",
+      "thumbnail": null,
+      "penulis": "Dinas PU",
+      "tanggal_publikasi": "2024-02-14T08:15:00",
+      "views": 89
+    }
+  ]
+}

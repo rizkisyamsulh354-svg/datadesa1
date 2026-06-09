@@ -1,0 +1,46 @@
+{
+  "tahun": 2024,
+  "tahun_list": [2024, 2023, 2022],
+  "total_anggaran": 125000000,
+  "total_realisasi": 98000000,
+  "anggaran": [
+    {
+      "id": 1,
+      "keterangan": "Gaji dan Tunjangan",
+      "anggaran": 50000000,
+      "persentase": 40.0
+    },
+    {
+      "id": 2,
+      "keterangan": "Pembangunan Infrastruktur",
+      "anggaran": 45000000,
+      "persentase": 36.0
+    },
+    {
+      "id": 3,
+      "keterangan": "Pelayanan Publik",
+      "anggaran": 30000000,
+      "persentase": 24.0
+    }
+  ],
+  "realisasi": [
+    {
+      "id": 1,
+      "keterangan": "Gaji dan Tunjangan",
+      "realisasi": 48000000,
+      "persentase": 49.0
+    },
+    {
+      "id": 2,
+      "keterangan": "Pembangunan Infrastruktur",
+      "realisasi": 32000000,
+      "persentase": 32.7
+    },
+    {
+      "id": 3,
+      "keterangan": "Pelayanan Publik",
+      "realisasi": 18000000,
+      "persentase": 18.4
+    }
+  ]
+}

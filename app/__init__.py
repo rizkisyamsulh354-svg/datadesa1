@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_cors import CORS
 from config import config
 from app.models import db, Admin
 
@@ -15,6 +16,10 @@ def create_app(config_name='development'):
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    
+    # Enable CORS for GitHub Pages
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    
     login_manager.login_view = 'auth.login'
     login_manager.login_message = 'Silakan login terlebih dahulu.'
     
@@ -35,9 +40,11 @@ def create_app(config_name='development'):
     
     # Register blueprints
     from app.routes import public_bp, admin_bp, auth_bp
+    from app.api import api_bp
     app.register_blueprint(public_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(api_bp)
     
     # Error handlers
     @app.errorhandler(404)

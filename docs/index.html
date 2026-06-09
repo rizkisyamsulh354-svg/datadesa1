@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Way Ilahan - Portal Transparansi Data dan Keuangan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .navbar-nav { display: flex; gap: 1rem; }
+        .navbar-nav a { color: #333; text-decoration: none; padding: 0.5rem 1rem; }
+        .navbar-nav a:hover { color: var(--primary); }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="#" class="navbar-brand" data-page="home" style="cursor: pointer;">
+                    <i class="fas fa-landmark"></i> Desa Way Ilahan
+                </a>
+                <div class="navbar-nav">
+                    <a href="#home" class="nav-link" data-page="home">Beranda</a>
+                    <a href="#profil" class="nav-link" data-page="profil">Profil</a>
+                    <a href="#berita" class="nav-link" data-page="berita">Berita</a>
+                    <a href="#galeri" class="nav-link" data-page="galeri">Galeri</a>
+                    <a href="#dokumen" class="nav-link" data-page="dokumen">Dokumen</a>
+                    <a href="#apb" class="nav-link" data-page="apb">APB</a>
+                    <a href="#penduduk" class="nav-link" data-page="penduduk">Data Penduduk</a>
+                    <a href="#pengaduan" class="nav-link" data-page="pengaduan">Pengaduan</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page">
+        <!-- Hero Section -->
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1 class="display-4"><i class="fas fa-landmark"></i> Selamat Datang</h1>
+                <p class="lead">di Portal Transparansi Data dan Keuangan Desa Way Ilahan</p>
+                <hr class="bg-white">
+                <p>Kecamatan Pulau Panggung, Kabupaten Tanggamus, Provinsi Lampung</p>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="section">
+            <div class="container">
+                <div class="stats-section"></div>
+            </div>
+        </div>
+
+        <!-- Berita Terbaru Section -->
+        <div class="section bg-light">
+            <div class="container">
+                <h2><i class="fas fa-newspaper"></i> Berita Terbaru</h2>
+                <div class="berita-terbaru"></div>
+                <div style="text-align: center;">
+                    <a href="#" data-page="berita" class="btn btn-outline-primary">Lihat Semua Berita</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Boxes -->
+        <div class="section">
+            <div class="container">
+                <div class="row flex" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-lock-open text-success"></i> Transparansi</h5>
+                            <p class="card-text">Semua data desa dapat diakses oleh masyarakat umum secara transparan dan terbuka untuk meningkatkan kepercayaan publik.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-shield-alt text-info"></i> Keamanan Data</h5>
+                            <p class="card-text">Data hanya dapat diubah oleh administrator yang memiliki akses khusus untuk menjaga integritas dan keakuratan informasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profil Page -->
+    <div id="profil" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-info-circle"></i> Profil Desa</h1>
+            </div>
+        </div>
+        <div class="section container profil-content"></div>
+    </div>
+
+    <!-- Berita Page -->
+    <div id="berita" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-newspaper"></i> Berita</h1>
+            </div>
+        </div>
+        <div class="section container">
+            <div class="berita-list"></div>
+            <div class="pagination-container"></div>
+        </div>
+    </div>
+
+    <!-- Berita Detail Page -->
+    <div id="berita-detail" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-newspaper"></i> Detail Berita</h1>
+            </div>
+        </div>
+        <div class="section container berita-detail-content"></div>
+    </div>
+
+    <!-- Galeri Page -->
+    <div id="galeri" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-image"></i> Galeri</h1>
+            </div>
+        </div>
+        <div class="section container">
+            <div class="galeri-list"></div>
+            <div class="pagination-container"></div>
+        </div>
+    </div>
+
+    <!-- Dokumen Page -->
+    <div id="dokumen" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-file-pdf"></i> Dokumen Publik</h1>
+            </div>
+        </div>
+        <div class="section container">
+            <div class="dokumen-list"></div>
+            <div class="pagination-container"></div>
+        </div>
+    </div>
+
+    <!-- APB Page -->
+    <div id="apb" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-chart-pie"></i> APB Desa</h1>
+            </div>
+        </div>
+        <div class="section container apb-content"></div>
+    </div>
+
+    <!-- Data Penduduk Page -->
+    <div id="penduduk" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-people-group"></i> Data Penduduk</h1>
+            </div>
+        </div>
+        <div class="section container">
+            <div class="penduduk-list"></div>
+            <div class="pagination-container"></div>
+        </div>
+    </div>
+
+    <!-- Pengaduan Page -->
+    <div id="pengaduan" class="page" style="display: none;">
+        <div class="jumbotron bg-primary text-white py-5">
+            <div class="container">
+                <h1><i class="fas fa-comments"></i> Pengaduan & Saran</h1>
+            </div>
+        </div>
+        <div class="section container">
+            <div class="row flex" style="grid-template-columns: 1fr 1fr;">
+                <div>
+                    <h3>Pengaduan Masyarakat</h3>
+                    <div class="pengaduan-list"></div>
+                </div>
+                <div>
+                    <h3>Kirim Pengaduan</h3>
+                    <form id="pengaduan-form">
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" class="form-control" name="nama_pelapor" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email_pelapor" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor HP</label>
+                            <input type="text" class="form-control" name="nomor_hp">
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select class="form-control" name="kategori">
+                                <option>Pengaduan</option>
+                                <option>Saran</option>
+                                <option>Pertanyaan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Subjek</label>
+                            <input type="text" class="form-control" name="subjek" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Isi</label>
+                            <textarea class="form-control" name="isi" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Pengaduan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Desa Way Ilahan. Semua hak cipta dilindungi.</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                <a href="#" style="color: white; text-decoration: underline;">Hubungi Kami</a> | 
+                <a href="#" style="color: white; text-decoration: underline;">Kebijakan Privasi</a> | 
+                <a href="#" style="color: white; text-decoration: underline;">Syarat & Ketentuan</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        const form = document.getElementById('pengaduan-form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const newEntry = {
+                    id: Date.now(),
+                    nama_pelapor: formData.get('nama_pelapor'),
+                    email_pelapor: formData.get('email_pelapor'),
+                    nomor_hp: formData.get('nomor_hp'),
+                    kategori: formData.get('kategori'),
+                    subjek: formData.get('subjek'),
+                    isi: formData.get('isi'),
+                    tanggal_dibuat: new Date().toISOString(),
+                    respon_admin: '',
+                    status: 'Dalam Proses'
+                };
+
+                const stored = localStorage.getItem('pengaduan_entries');
+                const entries = stored ? JSON.parse(stored) : [];
+                entries.unshift(newEntry);
+                localStorage.setItem('pengaduan_entries', JSON.stringify(entries));
+
+                alert('Pengaduan berhasil disimpan secara lokal.');
+                form.reset();
+
+                if (router.currentPage !== 'pengaduan') {
+                    router.navigate('pengaduan');
+                } else {
+                    router.loadPengaduan();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

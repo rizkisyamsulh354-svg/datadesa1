@@ -12,43 +12,43 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ aparatur.nama if aparatur else '' }}" required>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ form_data.get('nama') if form_data else (aparatur.nama if aparatur else '') }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="jabatan" class="form-label">Jabatan <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ aparatur.jabatan if aparatur else '' }}" required>
+                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ form_data.get('jabatan') if form_data else (aparatur.jabatan if aparatur else '') }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="nomor_identitas" class="form-label">Nomor Identitas (NIK/NPPE)</label>
-                        <input type="text" class="form-control" id="nomor_identitas" name="nomor_identitas" value="{{ aparatur.nomor_identitas if aparatur else '' }}">
+                        <input type="text" class="form-control" id="nomor_identitas" name="nomor_identitas" value="{{ form_data.get('nomor_identitas') if form_data else (aparatur.nomor_identitas if aparatur else '') }}">
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="nomor_hp" class="form-label">Nomor HP</label>
-                            <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp" value="{{ aparatur.nomor_hp if aparatur else '' }}">
+                            <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp" value="{{ form_data.get('nomor_hp') if form_data else (aparatur.nomor_hp if aparatur else '') }}">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ aparatur.email if aparatur else '' }}">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ form_data.get('email') if form_data else (aparatur.email if aparatur else '') }}">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ aparatur.alamat if aparatur else '' }}</textarea>
+                        <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ form_data.get('alamat') if form_data else (aparatur.alamat if aparatur else '') }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="tanggal_mulai_jabatan" class="form-label">Tanggal Mulai Jabatan</label>
-                        <input type="date" class="form-control" id="tanggal_mulai_jabatan" name="tanggal_mulai_jabatan" value="{{ aparatur.tanggal_mulai_jabatan if aparatur else '' }}">
+                        <input type="date" class="form-control" id="tanggal_mulai_jabatan" name="tanggal_mulai_jabatan" value="{{ form_data.get('tanggal_mulai_jabatan') if form_data else (aparatur.tanggal_mulai_jabatan.strftime('%Y-%m-%d') if aparatur and aparatur.tanggal_mulai_jabatan else '') }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name="keterangan" rows="3">{{ aparatur.keterangan if aparatur else '' }}</textarea>
+                        <textarea class="form-control" id="keterangan" name="keterangan" rows="3">{{ form_data.get('keterangan') if form_data else (aparatur.keterangan if aparatur else '') }}</textarea>
                     </div>
 
                     <div class="mb-3">

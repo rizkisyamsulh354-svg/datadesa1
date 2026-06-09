@@ -717,21 +717,41 @@ def kelola_aparatur():
 def tambah_aparatur():
     if request.method == 'POST':
         try:
+            nama = request.form.get('nama')
+            jabatan = request.form.get('jabatan')
+            tanggal_input = request.form.get('tanggal_mulai_jabatan')
+            tanggal_mulai = None
+
+            if not nama or not jabatan:
+                flash('Nama dan jabatan wajib diisi.', 'danger')
+                return render_template('admin/aparatur/form.html', action='Tambah', form_data=request.form)
+
+            if tanggal_input:
+                try:
+                    tanggal_mulai = datetime.strptime(tanggal_input, '%Y-%m-%d').date()
+                except ValueError:
+                    flash('Format tanggal Mulai Jabatan tidak valid. Gunakan format YYYY-MM-DD.', 'danger')
+                    return render_template('admin/aparatur/form.html', action='Tambah', form_data=request.form)
+
             aparatur = AparaturDesa(
-                nama=request.form.get('nama'),
-                jabatan=request.form.get('jabatan'),
+                nama=nama,
+                jabatan=jabatan,
                 nomor_identitas=request.form.get('nomor_identitas'),
                 alamat=request.form.get('alamat'),
                 nomor_hp=request.form.get('nomor_hp'),
                 email=request.form.get('email'),
-                tanggal_mulai_jabatan=request.form.get('tanggal_mulai_jabatan') if request.form.get('tanggal_mulai_jabatan') else None,
+                tanggal_mulai_jabatan=tanggal_mulai,
                 keterangan=request.form.get('keterangan')
             )
             
             # Handle foto upload
             if 'foto' in request.files:
                 file = request.files['foto']
-                if file and allowed_file(file.filename):
+                if file and file.filename:
+                    if not allowed_file(file.filename):
+                        flash('Format foto tidak diizinkan. Gunakan JPG/PNG.', 'danger')
+                        return render_template('admin/aparatur/form.html', action='Tambah', form_data=request.form)
+
                     filename = secure_filename(f"aparatur_{datetime.now().timestamp()}_{file.filename}")
                     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                     file.save(filepath)
@@ -756,19 +776,39 @@ def edit_aparatur(id):
     
     if request.method == 'POST':
         try:
-            aparatur.nama = request.form.get('nama')
-            aparatur.jabatan = request.form.get('jabatan')
+            nama = request.form.get('nama')
+            jabatan = request.form.get('jabatan')
+            tanggal_input = request.form.get('tanggal_mulai_jabatan')
+
+            if not nama or not jabatan:
+                flash('Nama dan jabatan wajib diisi.', 'danger')
+                return render_template('admin/aparatur/form.html', aparatur=aparatur, action='Edit', form_data=request.form)
+
+            tanggal_mulai = None
+            if tanggal_input:
+                try:
+                    tanggal_mulai = datetime.strptime(tanggal_input, '%Y-%m-%d').date()
+                except ValueError:
+                    flash('Format tanggal Mulai Jabatan tidak valid. Gunakan format YYYY-MM-DD.', 'danger')
+                    return render_template('admin/aparatur/form.html', aparatur=aparatur, action='Edit', form_data=request.form)
+
+            aparatur.nama = nama
+            aparatur.jabatan = jabatan
             aparatur.nomor_identitas = request.form.get('nomor_identitas')
             aparatur.alamat = request.form.get('alamat')
             aparatur.nomor_hp = request.form.get('nomor_hp')
             aparatur.email = request.form.get('email')
-            aparatur.tanggal_mulai_jabatan = request.form.get('tanggal_mulai_jabatan') if request.form.get('tanggal_mulai_jabatan') else None
+            aparatur.tanggal_mulai_jabatan = tanggal_mulai
             aparatur.keterangan = request.form.get('keterangan')
             
             # Handle foto upload
             if 'foto' in request.files:
                 file = request.files['foto']
-                if file and allowed_file(file.filename):
+                if file and file.filename:
+                    if not allowed_file(file.filename):
+                        flash('Format foto tidak diizinkan. Gunakan JPG/PNG.', 'danger')
+                        return render_template('admin/aparatur/form.html', aparatur=aparatur, action='Edit', form_data=request.form)
+
                     # Delete old foto
                     if aparatur.foto:
                         old_path = os.path.join(current_app.config['UPLOAD_FOLDER'], aparatur.foto)
@@ -815,7 +855,7 @@ def hapus_aparatur(id):
 
 # ============ ADMIN PROFIL DESA ROUTES =============
 
-@admin_bp.route('/profil')
+@admin_bp.route('/profil', methods=['GET', 'POST'])
 @login_required
 def edit_profil_desa():
     profil = ProfilDesa.query.first()
@@ -859,6 +899,7 @@ def edit_profil_desa():
             
             log_activity(current_user.id, 'Edit Profil Desa', 'Profil', 'Update profil desa')
             flash('Profil desa berhasil diupdate', 'success')
+            return redirect(url_for('admin.edit_profil_desa'))
         except Exception as e:
             db.session.rollback()
             flash(f'Terjadi kesalahan: {str(e)}', 'danger')

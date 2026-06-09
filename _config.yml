@@ -1,0 +1,14 @@
+# GitHub Pages Configuration
+theme: jekyll-theme-minimal
+title: Desa Way Ilahan
+description: Portal Transparansi Data dan Keuangan Desa
+
+# Don't process these files
+exclude:
+  - .github/
+  - app/
+  - run.py
+  - config.py
+  - requirements.txt
+  - seed.py
+  - README.md

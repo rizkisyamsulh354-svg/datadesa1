@@ -1,0 +1,112 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "judul": "Gotong Royong Bersih Desa",
+      "deskripsi": "Warga membersihkan lingkungan bersama-sama.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Kegiatan Desa",
+      "tanggal_upload": "2024-05-10T08:00:00"
+    },
+    {
+      "id": 2,
+      "judul": "Pelatihan Pembuatan Kerajinan Tangan",
+      "deskripsi": "Ibu-ibu PKK belajar membuat kerajinan tangan.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Pelatihan",
+      "tanggal_upload": "2024-04-25T09:30:00"
+    },
+    {
+      "id": 3,
+      "judul": "Pertemuan Lurah dan Warga",
+      "deskripsi": "Sosialisasi program desa bersama seluruh perangkat.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Pertemuan",
+      "tanggal_upload": "2024-04-15T10:00:00"
+    },
+    {
+      "id": 4,
+      "judul": "Panen Raya Jagung",
+      "deskripsi": "Petani desa merayakan hasil panen bersama keluarga.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Pertanian",
+      "tanggal_upload": "2024-05-20T08:30:00"
+    },
+    {
+      "id": 5,
+      "judul": "Kegiatan Posyandu Balita",
+      "deskripsi": "Petugas kesehatan desa mengadakan layanan posyandu.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Kesehatan",
+      "tanggal_upload": "2024-05-30T09:00:00"
+    },
+    {
+      "id": 6,
+      "judul": "Festival Seni dan Budaya",
+      "deskripsi": "Acara seni tradisional desa dengan tarian dan lagu lokal.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Budaya",
+      "tanggal_upload": "2024-06-02T11:00:00"
+    },
+    {
+      "id": 7,
+      "judul": "Pengembangan Taman Edukasi",
+      "deskripsi": "Anak-anak mendapat pembelajaran alam di taman desa.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Pendidikan",
+      "tanggal_upload": "2024-04-08T13:45:00"
+    },
+    {
+      "id": 8,
+      "judul": "Pembangunan Jembatan Kecil",
+      "deskripsi": "Jembatan baru dibangun untuk akses antar dusun.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Infrastruktur",
+      "tanggal_upload": "2024-03-22T15:20:00"
+    },
+    {
+      "id": 9,
+      "judul": "Layanan Administrasi Desa",
+      "deskripsi": "Masyarakat mendapatkan layanan administrasi langsung di balai desa.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Pelayanan",
+      "tanggal_upload": "2024-03-10T10:05:00"
+    },
+    {
+      "id": 10,
+      "judul": "Pasar Murah Bahan Pokok",
+      "deskripsi": "Kegiatan pasar murah untuk membantu kebutuhan warga.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Ekonomi",
+      "tanggal_upload": "2024-02-28T08:45:00"
+    },
+    {
+      "id": 11,
+      "judul": "Pembersihan TPA Sampah",
+      "deskripsi": "Tim kebersihan desa membersihkan lokasi pembuangan sampah.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Lingkungan",
+      "tanggal_upload": "2024-02-18T09:00:00"
+    },
+    {
+      "id": 12,
+      "judul": "Pertemuan Kelompok Tani",
+      "deskripsi": "Petani berdiskusi tentang peningkatan hasil dan pemasaran.",
+      "file_path": null,
+      "file_type": "photo",
+      "kategori": "Agribisnis",
+      "tanggal_upload": "2024-02-05T14:10:00"
+    }
+  ]
+}

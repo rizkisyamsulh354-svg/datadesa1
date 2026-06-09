@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Build static site
+      run: |
+        echo "Static site in docs/ is ready"
+        ls -la docs/
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: ./docs
+        keep_files: false
+        allow_empty_commit: true
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to Render
+      # Gunakan webhook trigger Render atau manual deployment
+      run: |
+        echo "Backend deployment can be triggered via Render webhook"
+        # Uncomment and configure sesuai Render setup Anda
+        # curl -X POST https://api.render.com/deploy/YOUR_SERVICE_ID?key=YOUR_API_KEY

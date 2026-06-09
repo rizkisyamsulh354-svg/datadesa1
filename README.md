@@ -2,12 +2,15 @@
 
 Website Transparansi Data dan Keuangan Desa Way Ilahan - Kecamatan Pulau Panggung, Kabupaten Tanggamus, Provinsi Lampung
 
+🌐 **Live Demo**: https://rizkisyamsulh354-svg.github.io/datadesa1/
+
 ## 📋 Daftar Isi
 - [Fitur Utama](#fitur-utama)
+- [Arsitektur](#arsitektur)
+- [Quick Start](#quick-start)
+- [Deployment](#deployment)
 - [Persyaratan Sistem](#persyaratan-sistem)
 - [Instalasi](#instalasi)
-- [Konfigurasi](#konfigurasi)
-- [Penggunaan](#penggunaan)
 - [Struktur Proyek](#struktur-proyek)
 
 ## ✨ Fitur Utama
@@ -34,19 +37,94 @@ Website Transparansi Data dan Keuangan Desa Way Ilahan - Kecamatan Pulau Panggun
 - 📈 **Kelola APB** - Input anggaran dan realisasi
 - ⚙️ **Pengaturan Lengkap** - Edit profil, password, dan account
 
+## 🏗️ Arsitektur
+
+Aplikasi ini menggunakan **arsitektur microservices** yang modern:
+
+```
+┌─────────────────────────────────────┐
+│   GitHub Pages (Frontend)           │
+│   - Static HTML/CSS/JS              │
+│   - URL: *.github.io/datadesa1      │
+│   - Folder: /docs                   │
+└────────────┬────────────────────────┘
+             │ CORS API Calls
+             ↓
+┌─────────────────────────────────────┐
+│   Backend API (Flask)               │
+│   - REST API Endpoints              │
+│   - Database Management             │
+│   - Admin Panel                     │
+│   - Deployed: Render / Railway      │
+└─────────────────────────────────────┘
+```
+
+**Keuntungan Arsitektur ini:**
+✅ Frontend static → CDN friendly, fast loading  
+✅ Backend terpisah → scalable, mudah di-maintain  
+✅ Deployment mudah → GitHub Pages free, backend di Render free  
+✅ CORS enabled → secure cross-origin requests  
+✅ API-first → mudah di-extend atau integrate dengan aplikasi lain  
+
+## 🚀 Quick Start
+
+### Development Lokal
+```bash
+# 1. Setup
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+
+# 2. Jalankan Backend
+python run.py              # Port 5000
+
+# 3. Jalankan Frontend (Terminal baru)
+cd docs
+python -m http.server 8000  # Port 8000
+
+# 4. Buka di browser
+# Frontend: http://localhost:8000
+# Admin:    http://localhost:5000/auth/login
+```
+
+Lihat **[QUICKSTART.md](QUICKSTART.md)** untuk detail lebih lengkap.
+
+## 🌐 Deployment
+
+### Frontend → GitHub Pages
+```bash
+# Otomatis via GitHub Actions
+# Folder /docs di-deploy sebagai static site
+```
+
+> Frontend statis ini sudah dapat dijalankan sepenuhnya tanpa Python atau backend.
+
+### Backend → Render (opsional)
+1. Buat account di [render.com](https://render.com)
+2. Connect GitHub repository
+3. Deploy Web Service dengan `render.yaml`
+4. Copy API URL dari Render
+5. Update di `docs/js/app.js`
+
+> Jika kamu hanya ingin website statis di GitHub Pages, bagian backend tidak wajib.
+
+Lihat **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** untuk panduan lengkap.
+
 ## 💻 Persyaratan Sistem
 
 - Python 3.8+
 - Flask 2.3.2+
 - SQLAlchemy
-- SQLite3
-- Browser modern
+- Flask-CORS
+- Gunicorn (untuk production)
+- Browser modern (Chrome, Firefox, Safari, Edge)
 
 ## 📥 Instalasi
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/yourusername/datadesa1.git
+git clone https://github.com/rizkisyamsulh354-svg/datadesa1.git
 cd datadesa1
 ```
 
